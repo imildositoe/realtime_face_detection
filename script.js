@@ -8,7 +8,7 @@ Promise.all([
 ]).then(startVideo);
 
 function startVideo() {
-    navigator.getUserMedia(
+    navigator.mediaDevices.getUserMedia(
         {video: {}},
         stream => video.srcObject = stream,
         err => console.error(err)
@@ -22,6 +22,6 @@ video.addEventListener('play', () => {
     faceapi.matchDimensions(canvas, displaySize);
     setInterval(async () => {
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
-        const resisedDetections = faceapi.resizeResults(detections, displaySize);
+        const resizedDetections = faceapi.resizeResults(detections, displaySize);
     }, 100);
 });
