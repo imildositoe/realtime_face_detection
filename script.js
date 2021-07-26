@@ -11,11 +11,31 @@ function startVideo() {
     navigator.mediaDevices.getUserMedia(
         {video: {}},
         stream => video.srcObject = stream,
-        err => console.error(err)
+        err => console.error('My error: ' + err)
     );
+
+
+    // let constraints = {audio: true, video: {width: 1280, height: 720}};
+    // navigator.mediaDevices.getUserMedia(constraints)
+    //     .then(function (mediaStream) {
+    //         let video = document.querySelector('video');
+    //         video.srcObject = mediaStream;
+    //         video.onloadedmetadata = function (e) {
+    //             video.play();
+    //         };
+    //     }).catch(function (err) {
+    //         console.log(err.name + ": " + err.message);
+    //     });
+
+
+    // navigator.getUserMedia(
+    //     { video: {} },
+    //     stream => video.srcObject = stream,
+    //     err => console.error(err)
+    // );
 }
 
-video.addEventListener('play', () => {
+video.addEventListener('playing', () => {
     const canvas = faceapi.createCanvasFromMedia(video);
     document.body.append(canvas);
     const displaySize = {width: video.width, height: video.height};
